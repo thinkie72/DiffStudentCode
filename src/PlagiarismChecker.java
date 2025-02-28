@@ -16,15 +16,12 @@ public class PlagiarismChecker {
      */
     public static int longestSharedSubstring(String doc1, String doc2) {
 
-        // TODO Complete this function to return the length of the longest shared substring.
         int[][] tabulation = new int[doc1.length() + 1][doc2.length() + 1];
         int test;
         for (int i = 1; i < tabulation.length; i++) {
             for (int j = 1; j < tabulation[0].length; j++) {
                 if (doc1.charAt(i - 1) == doc2.charAt(j - 1)) {
-                    test = tabulation[i - 1][j];
-                    if (test <= i && test <= j) tabulation[i][j] = test + 1;
-                    else tabulation[i][j] = test;
+                    tabulation[i][j] = tabulation[i - 1][j - 1] + 1;
                 }
                 else tabulation[i][j] = Math.max(tabulation[i - 1][j], tabulation[i][j - 1]);
             }
